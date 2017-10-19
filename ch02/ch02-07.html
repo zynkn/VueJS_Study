@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="simple">
+        잔고 : <input type="text" v-model="balance" />
+        <br /> 당신의 등급 :
+        <span v-if="balance >= 100">GOLD</span>
+        <span v-else-if="balance >= 200">SILVER</span>
+        <span v-else-if="balance >= 300">BRONZE</span>
+        <span v-else>POOR</span>
+    </div>
+
+    <script type="text/javascript">
+        var simple = new Vue({
+            el: '#simple',
+            data: {
+                balance: 99
+            }
+        });
+    </script>
+</body>
+
+</html>

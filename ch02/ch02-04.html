@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="simple">
+        <input type="text" v-model="name" placeholder="Input your name..." />
+        <br /> 입력된 이름 :
+        <h2 v-html="name"></h2>
+        <img v-bind:src="name" />
+    </div>
+
+    <script type="text/javascript">
+        var model = {
+            name: "John snow"
+        };
+
+        var simple = new Vue({
+            el: '#simple',
+            data: model
+        });
+    </script>
+</body>
+
+</html>
