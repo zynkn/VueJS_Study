@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .red {
+            color: red;
+            font-size: 45pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <input type="text" v-model="inputedText" />
+        <div class="outputs">
+            <p v-for="val in filtered">{{val.city}}</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        const jsonData = "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+        const datas = [];
+        fetch(jsonData)
+            .then(blob => blob.json())
+            .then(data => datas.push(...data));
+
+
+        var container = new Vue({
+            el: "#container",
+            data: {
+                "cities": datas,
+                "inputedText": ''
+            },
+            computed: {
+                filtered: function() {
+                    var inputed = this.inputedText.trim();
+
+                    return this.cities.filter(function(item, idx) {
+                        if (item.city.indexOf(inputed) > -1) {
+                            return true;
+                        }
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

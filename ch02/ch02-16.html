@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        #list {
+            width: 400px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        
+        #list td,
+        #list th {
+            border: 1px solid black;
+            text-align: center;
+        }
+        
+        #list>thead>tr {
+            color: yellow;
+            background-color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="example">
+        <p>국가명 : <input type="text" v-model="countryname" placeholder="국가명" /></p>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>국가명</th>
+                    <th>수도</th>
+                    <th>지역</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="c in filtered">
+                    <td>{{c.no}}</td>
+                    <td>{{c.name}}</td>
+                    <td>{{c.capital}}</td>
+                    <td>{{c.region}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        var model = {
+            countryname: "",
+            countries: [{
+                no: 1,
+                name: "USA",
+                capital: "Washington",
+                region: "America"
+            }, {
+                no: 2,
+                name: "France",
+                capital: "Paris",
+                region: "Europe"
+            }, {
+                no: 3,
+                name: "UK",
+                capital: "London",
+                region: "Europe"
+            }, {
+                no: 4,
+                name: "Chian",
+                capital: "Beijing",
+                region: "Asia"
+            }, {
+                no: 5,
+                name: "Thailand",
+                capital: "Bankok",
+                region: "Asia"
+            }, {
+                no: 6,
+                name: "Moroco",
+                capital: "rabat",
+                region: "Africa"
+            }, {
+                no: 7,
+                name: "Vietnam",
+                capital: "Hanoi",
+                region: "Asia"
+            }, {
+                no: 8,
+                name: "Laos",
+                capital: "Vientian",
+                region: "Asia"
+            }, {
+                no: 9,
+                name: "Pizi",
+                capital: "Suba",
+                region: "Oceania"
+            }, {
+                no: 10,
+                name: "Solomon",
+                capital: "Honiara",
+                region: "Oceania"
+            }, {
+                no: 11,
+                name: "Jameica",
+                capital: "Kingston",
+                region: "America"
+            }, {
+                no: 12,
+                name: "Namibia",
+                capital: "Vinthok",
+                region: "Africa"
+            }, {
+                no: 13,
+                name: "Dongtimor",
+                capital: "Dilli",
+                region: "Asia"
+            }, {
+                no: 14,
+                name: "Mexico",
+                capital: "Mexico City",
+                region: "America"
+            }, {
+                no: 15,
+                name: "Venezuella",
+                capital: "Karakas",
+                region: "America"
+            }, {
+                no: 16,
+                name: "West Samoa",
+                capital: "Apia",
+                region: "Oceania"
+            }]
+        }
+        var clist = new Vue({
+            el: "#example",
+            data: model,
+            computed: {
+                filtered: function() {
+                    var cname = this.countryname.trim();
+                    return this.countries.filter(function(item, index) {
+                        if (item.name.indexOf(cname) > -1) {
+                            return true;
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

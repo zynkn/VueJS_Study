@@ -21,6 +21,10 @@
             el: '#simple',
             data: model
         });
+
+        var temp = document.querySelector("#simple > h2");
+        temp.innerText = "innerText";
+        temp.innerText = model.message;
     </script>
 </body>
 
