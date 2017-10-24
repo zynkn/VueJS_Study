@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        .red {
+            color: red;
+            font-size: 20px;
+        }
+        
+        #Hover {
+            background-color: blue;
+        }
+        
+        #Hover:hover {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app-2">
+        <span v-bind:title="message" v-bind:class="className" v-bind:data-key="dataKey" :id="Id">
+          마우스를 Hover하고, 로드된 시간을 확인하세요!
+        </span>
+        <input type="text" v-bind:value="message" />
+    </div>
+    <script type="text/javascript">
+        var app2 = new Vue({
+            el: '#app-2',
+            data: {
+                message: '이 페이지는 ' + new Date() + ' 에 로드 되었습니다',
+                className: 'red',
+                dataKey: '909',
+                Id: 'Hover'
+            }
+        });
+    </script>
+</body>
+
+</html>

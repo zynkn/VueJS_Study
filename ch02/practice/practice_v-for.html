@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        .red {
+            color: red;
+            font-size: 45pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myVue">
+        <p v-for="(item,index,value) in content">{{item.title}} [{{index}}]</p>
+    </div>
+
+    <div id="myVue2">
+        <p v-for="(v,k,i) in datas">{{v}}</p>
+    </div>
+    <script type="text/javascript">
+        var myVue = new Vue({
+            el: "#myVue",
+            data: {
+                "content": [{
+                        "title": "Apple"
+                    }, {
+                        "title": "Banana"
+                    }, {
+                        "title": "Caramel"
+                    }
+
+                ]
+            }
+
+        });
+
+        var myVue2 = new Vue({
+            el: "#myVue2",
+            data: {
+                datas: {
+                    "a": "Americano",
+                    "b": "Africano",
+                    "c": "Asiano",
+                    "d": "Europeano"
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

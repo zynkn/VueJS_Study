@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+
+    <div id="example">
+        <select id="regions">
+            <option disabled="disabled" selected>
+                Choose Your region.
+            </option>
+            <option v-for="(val, key) in regions" v-bind:value="key">
+                {{val}}
+            </option>
+        </select>
+    </div>
+
+    <script type="text/javascript">
+        var regions = {
+            "A": "Asia",
+            "B": "America",
+            "C": "Europe",
+            "D": "Africa",
+            "E": "Oceania"
+        };
+
+        var list = new Vue({
+            el: "#example",
+            data: {
+                regions: regions
+            }
+        });
+    </script>
+</body>
+
+</html>

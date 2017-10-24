@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        .red {
+            color: red;
+            font-size: 45pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myVue">
+        <p>{{message}}</p>
+        <input type="text" v-model="message" />
+        <img v-bind:src="message" />
+        <input type="text" v-model="className" />
+        <p :class="className">ggggggg</p>
+    </div>
+
+    <script type="text/javascript">
+        var myVue = new Vue({
+            el: "#myVue",
+            data: {
+                "message": "My Message",
+                "className": "none"
+            }
+        })
+    </script>
+</body>
+
+</html>

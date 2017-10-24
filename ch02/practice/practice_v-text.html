@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="myVue" v-text="data.data">
+    </div>
+    <script type="text/javascript">
+        var data = {
+            data: {
+                data: {
+                    data: "I'm data's data's data."
+                }
+            }
+        };
+        document.getElementById("myVue").innerText = JSON.stringify(data);
+    </script>
+</body>
+
+</html>
