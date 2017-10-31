@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #example {
+            height: 98vh;
+            min-height: 100%;
+            padding: 5px;
+        }
+    </style>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="example" v-on:contextmenu="ctxStop">
+        <a href="https://facebook.com" @click="confirmFB">페이스북</a>
+
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#example",
+            methods: {
+                ctxStop: function(e) {
+                    e.preventDefault();
+                },
+                confirmFB: function(e) {
+                    if (!confirm("Do you want to go to Facebook?")) {
+                        e.preventDefault();
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

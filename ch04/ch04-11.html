@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        #example {
+            height: 98vh;
+            min-height: 100%;
+            padding: 10px;
+        }
+    </style>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="example" v-on:contextmenu.prevent="ctxStop" @mouseup.left="leftMouse" @mouseup.right="rightMouse">
+        <div>
+            Left Click : go left <br/> Right Click : go right
+        </div>
+        <img src="http://sample.bmaster.kro.kr/img/foot.jpg" v-bind:style="{position:'absolute', left: pos.left+'px', top: pos.top+'px'}" />
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#example",
+            data: {
+                pos: {
+                    left: 100,
+                    top: 100
+                }
+            },
+            methods: {
+                ctxStop: function(e) {},
+                leftMouse: function(e) {
+                    if (this.pos.left > 30) {
+                        this.pos.left -= 30;
+                        console.log("Move left");
+                    }
+                },
+                rightMouse: function(e) {
+                    this.pos.left += 30;
+                    console.log("Move Right");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
