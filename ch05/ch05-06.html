@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Chapter 05</title>
+    <style>
+      .set1{
+        background-color: aqua;
+        color: purple;
+      }
+
+      .set2{
+        text-align: center;
+        width: 120px;
+      }
+
+      .set3{
+        border: 1px dashed sandybrown;
+      }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="example">
+      <button id="btn1" v-bind:class="myStyle">Button1</button>
+      <p>
+        <input type="checkbox" v-model="myStyle.set1" value="true"  />Set1 design<br/>
+        <input type="checkbox" v-model="myStyle.set2" value="true"  />Set2 design<br/>
+        <input type="checkbox" v-model="myStyle.set3" value="true"  />Set3 design<br/>
+      </p>
+    </div>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: "#example",
+        data: {
+          myStyle:{
+            set1: false,
+            set2: false,
+            set3: false
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

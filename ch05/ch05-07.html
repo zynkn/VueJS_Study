@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Chapter 05</title>
+    <style>
+      .score{
+        border: 1px solid black;
+      }
+      .warning{
+        background-color: orange;
+        color: purple;
+      }
+      .warnimage{
+        width: 18px;
+        height: 18px;
+        top: 5px;
+        position: relative;
+      }
+    </style>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+  </head>
+  <body>
+    <div id="example">
+      <p>
+        1~100 input.
+      </p>
+      <div>
+        Score : <input type="text" class="score" v-model.number="score" v-bind:class="info" />
+        <img src="http://www.iconarchive.com/download/i91533/icons8/windows-8/Programming-Delete-Sign.ico" class="warnimage" v-show="info.warning" />
+      </div>
+    </div>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: "#example",
+        data: {
+          score: 0
+        },
+        computed: {
+          info: function(){
+            if(this.score >= 1 && this.score <= 100){
+              return {warning: false};
+            }else{
+              return {warning: true};
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

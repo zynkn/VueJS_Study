@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome to Vue</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <div id="myVue" >
+      <p>
+        Original Message : <b>{{message}}</b>
+      </p>
+      <p>
+        Computed Message : <b>{{Rmessage}}</b>
+      </p>
+      <p>
+        Computed computed Message : <b>{{RRmessage}}</b>
+      </p>
+    </div>
+    <script type="text/javascript">
+        var myVue = new Vue({
+            el: '#myVue',
+            data: {
+              message: 'Hello Everyone.'
+            },
+            computed: {
+              Rmessage: function(){
+                return this.message.split('').reverse().join('') + Date.now()
+              },
+              RRmessage: function(){
+                return this.Rmessage += Date.now()
+              }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
