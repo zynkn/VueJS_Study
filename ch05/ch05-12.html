@@ -1,147 +1,192 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>Chapter 05</title>
     <style>
-      *{
-        box-sizing: border-box;
-      }
-      ul{
-        margin: 0;
-        padding: 0;
-      }
-      ul li{
-        cursor: pointer;
-        position: relative;
-        padding: 8px 8px 8px 40px;
-        background: #eee;
-        font-size: 14px;
-        transition: 0.2s;
-        user-select: none;
-      }
-      ul li:hover{
-        background: #ddd;
-      }
-      ul li.checked{
-        background: #bbb;
-        color: #fff;
-        text-decoration: line-through;
-      }
-      ul li.checked::before{
-        content: '';
-        position: absolute;
-        border-color: #fff;
-        border-style: solid;
-        border-width: 0px 1px 1px 0px;
-        top: 10px;
-        left: 16px;
-        transform: rotate(45deg);
-        height: 8px;
-        width: 8px;
-      }
-      .close{
-        position: absolute;
-        right: 0;
-        top: 0;
-        padding: 12px 16px 12px 16px;
-      }
-      .close:hover{
-        background: #f44336;
-        color: #fff;
-
-      }
-      .header{
-        background: purple;
-        padding: 30px;
-        color: yellow;
-        text-align: center;
-      }
-      .header::after{
-        content: '';
-        display: table;
-        clear: both;
-      }
-      .input{
-        border: none;
-        width: 75%;
-        height: 35px;
-        padding: 10px;
-        float: left;
-        font-size: 16px;
-      }
-      .addButton{
-
-        padding: 10px;
-        width: 25%;
-        height: 35px;
-        background: #d9d9d9;
-        color: #555;
-        float: left;
-        text-align: center;
-        font-size: 13px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      .addButton:hover{
-        background: #bbb;
-      }
-      .completed{
-        text-decoration: none;
-      }
+        * {
+            box-sizing: border-box;
+        }
+        
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+        
+        ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 8px 8px 8px 40px;
+            background: #eee;
+            font-size: 14px;
+            transition: 0.2s;
+            user-select: none;
+        }
+        
+        ul li:hover {
+            background: #ddd;
+        }
+        
+        ul li.checked {
+            background: #bbb;
+            color: #fff;
+            text-decoration: line-through;
+        }
+        
+        ul li.checked::before {
+            content: '';
+            position: absolute;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 0px 1px 1px 0px;
+            top: 10px;
+            left: 16px;
+            transform: rotate(45deg);
+            height: 8px;
+            width: 8px;
+        }
+        
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 12px 16px 12px 16px;
+        }
+        
+        .close:hover {
+            background: #f44336;
+            color: #fff;
+        }
+        
+        .header {
+            background: purple;
+            padding: 30px;
+            color: yellow;
+            text-align: center;
+        }
+        
+        .header::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+        
+        .input {
+            border: none;
+            width: 75%;
+            height: 35px;
+            padding: 10px;
+            float: left;
+            font-size: 16px;
+        }
+        
+        .addButton {
+            padding: 10px;
+            width: 25%;
+            height: 35px;
+            background: #d9d9d9;
+            color: #555;
+            float: left;
+            text-align: center;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .addButton:hover {
+            background: #bbb;
+        }
+        
+        .completed {
+            text-decoration: none;
+        }
     </style>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="todolistapp">
-      <div id="header" class="header">
-        <h2>Todo List App</h2>
-        <input class="input" type="text" id="task" v-model.trim="todo" v-on:keyup.enter="addTodo" placeholder="After input, push enter!" />
-        <span class="addbutton">ADDD</span>
-      </div>
-      <ul id="todolist">
-        <li v-for="(a, index) in todolist" v-bind:class="checked(a.done)" v-on:click="doneToggle(index)">
-          <span>{{a.todo}}</span>
-          <span v-if="a.done">(completed)</span>
-          <span class="close" v-on:click.stop="deleteTodo(index)">&#x00D7;</span>
-        </li>
-      </ul>
+        <div id="header" class="header">
+            <h2>Todo List App</h2>
+            <input class="input" type="text" id="task" v-model.trim="todo" v-on:keyup.enter="addTodo" placeholder="After input, push enter!" />
+            <span class="addbutton">ADDD</span>
+        </div>
+        <ul id="todolist">
+            <li v-for="(a, index) in todolist" v-bind:class="checked(a.done)" v-on:click="doneToggle(index)">
+                <span>{{a.todo}}</span>
+                <span v-if="a.done">(completed)</span>
+                <span class="close" v-on:click.stop="deleteTodo(index)">&#x00D7;</span>
+            </li>
+            <!-- <li v-for="(a, index) in todolist" v-bind:class="checked(a.done)" v-if="filterCondition=='progressing' && !a.done" v-on:click="doneToggle(index)">
+                <span>{{a.todo}}</span>
+                <span v-if="a.done">(completed)</span>
+                <span class="close" v-on:click.stop="deleteTodo(index)">&#x00D7;</span>
+            </li>
+            <li v-for="(a, index) in todolist" v-bind:class="checked(a.done)" v-if="filterCondition=='done' && a.done" v-on:click="doneToggle(index)">
+                <span>{{a.todo}}</span>
+                <span v-if="a.done">(completed)</span>
+                <span class="close" v-on:click.stop="deleteTodo(index)">&#x00D7;</span>
+            </li> -->
+        </ul>
+        <input type="radio" name="radio" v-model="filterCondition" value="all" />
+        <input type="radio" name="radio" v-model="filterCondition" value="progressing" />
+        <input type="radio" name="radio" v-model="filterCondition" value="done" />
     </div>
     <script type="text/javascript">
-      var vm = new Vue({
-        el: "#todolistapp",
-        data: {
-          todo: "",
-          todolist: [
-            {todo: "Watching Movie", done: false},
-            {todo: "Take a work", done: true},
-            {todo: "ES6 Study", done: false},
-            {todo: "Go to baseball stadium", done: false},
-          ]
-        },
-        methods: {
-          checked: function(done){
-            if(done){
-              return {checked: true}
-            }else{
-              return {checked: false}
+        var vm = new Vue({
+            el: "#todolistapp",
+            data: {
+                todo: "",
+                filterCondition: "all",
+                todolist: [{
+                    todo: "Watching Movie",
+                    done: false
+                }, {
+                    todo: "Take a work",
+                    done: true
+                }, {
+                    todo: "ES6 Study",
+                    done: false
+                }, {
+                    todo: "Go to baseball stadium",
+                    done: false
+                }, ]
+            },
+            methods: {
+                checked: function(done) {
+                    if (done) {
+                        return {
+                            checked: true
+                        }
+                    } else {
+                        return {
+                            checked: false
+                        }
+                    }
+                },
+                addTodo: function(e) {
+                    if (this.todo !== "") {
+                        this.todolist.push({
+                            todo: this.todo,
+                            done: false
+                        });
+                        this.todo = "";
+                    }
+                },
+                deleteTodo: function(index) {
+                    this.todolist.splice(index, 1);
+                },
+                doneToggle: function(index) {
+                    this.todolist[index].done = !this.todolist[index].done;
+                },
+                ccc: function(state) {
+                    console.log(state);
+                    this.filterCondition = state;
+                }
             }
-          },
-          addTodo: function(e){
-            if(this.todo !== ""){
-              this.todolist.push({todo: this.todo, done: false});
-              this.todo = "";
-            }
-          },
-          deleteTodo: function(index){
-            this.todolist.splice(index, 1);
-          },
-          doneToggle: function(index){
-            this.todolist[index].done = !this.todolist[index].done;
-          }
-        }
-      })
-
+        })
     </script>
-  </body>
+</body>
+
 </html>

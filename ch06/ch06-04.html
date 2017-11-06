@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Chapter 06</title>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+</head>
+
+<body>
+    <hello-component></hello-component>
+
+</body>
+<template id="helloTemplate">
+        <div>Hello World!</div>
+    </template>
+<script type="text/javascript">
+    Vue.component('hello-component', {
+        template: '#helloTemplate'
+    })
+</script>
+
+</html>

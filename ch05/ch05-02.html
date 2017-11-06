@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>Chapter 05</title>
     <style>
 
     </style>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="example">
-      <button id="a" v-bind:style="style1" @mouseover.stop="overEvent" @mouseout.stop="outEvent">테스트</button>
+        <button id="a" v-bind:style="style1" @mouseover.stop="overEvent" @mouseout.stop="outEvent">테스트</button>
     </div>
     <script type="text/javascript">
-      var vm = new Vue({
-        el: "#example",
-        data: {
-          style1: {
-            backgroundColor: 'aqua',
-            border: '1px solid gray',
-            width: '100px',
-            textAlign: 'center'
-          }
-        },
-        methods: {
-          overEvent: function(e){
-            this.style1.backgroundColor = "purple";
-            this.style1.color = 'yellow';
-          },
-          outEvent: function(e){
-            this.style1.backgroundColor = "aqua";
-            this.style1.color = "black";
-          }
-        }
-      })
+        var vm = new Vue({
+            el: "#example",
+            data: {
+                style1: {
+                    backgroundColor: 'aqua',
+                    border: '1px solid gray',
+                    width: '100px',
+                    textAlign: 'center',
+                    transform: 'scale(1.9)',
+                    display: 'flex'
+                }
+            },
+            methods: {
+                overEvent: function(e) {
+                    this.style1.backgroundColor = "purple";
+                    this.style1.color = 'yellow';
+                },
+                outEvent: function(e) {
+                    this.style1.backgroundColor = "aqua";
+                    this.style1.color = "black";
+                }
+            }
+        })
     </script>
-  </body>
+</body>
+
 </html>
