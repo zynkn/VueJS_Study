@@ -1,6 +1,6 @@
 <script type="text/javascript">
 import Vue from 'vue';
 
-var eventBut = new Vue();
+var eventBus = new Vue();
 export default eventBus;
 </script>

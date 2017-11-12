@@ -25,11 +25,11 @@
   </div>
 </template>
 <script type='text/javascript'>
-import InputTodo from './InputTodo.vue';
-import List from './List.vue';
+  import InputTodo from './InputTodo.vue';
+  import List from './List.vue';
 
-export default{
-  name: 'todo-list',
-  components: {InputTodo, List}
-}
+  export default{
+    name: 'todo-list',
+    components: {InputTodo, List}
+  }
 </script>
