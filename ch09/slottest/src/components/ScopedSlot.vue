@@ -9,7 +9,7 @@
 <script>
     export default{
         data(){
-            return { x: 4, y: 5};
+            return { x: 123123, y: 5};
         }
     }
 </script>

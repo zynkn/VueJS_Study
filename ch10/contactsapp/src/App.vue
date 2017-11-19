@@ -100,6 +100,7 @@
         })
         .then((response)=>{
           this.contactlist = response.data;
+          console.log(response);
         })
         .catch((ex)=>{
           console.log('fetchContacts failed...',ex);

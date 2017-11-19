@@ -9,9 +9,7 @@
           </li>
           <li>
             <a href="#" @click="changeMenu('about')">About</a>
-            <!-- <keep-alive include="about, home">
-              <component v-bind:is="currentView"></component>
-            </keep-alive> -->
+            
           </li>
           <li>
             <a href="#" @click="changeMenu('contact')">Contact</a>
@@ -20,7 +18,10 @@
       </nav>
     </div>
     <div class="container">
-      <component v-bind:is="currentView"></component>
+      <!-- <component v-bind:is="currentView"></component> -->
+      <keep-alive include="about, home">
+        <component v-bind:is="currentView"></component>
+      </keep-alive>
     </div>
   </div>
 </template>

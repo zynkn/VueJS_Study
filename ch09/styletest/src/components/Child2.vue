@@ -1,5 +1,5 @@
 <template>
-    <div class="main"> {{ msg }} </div>
+    <div class="main" > {{ msg }} </div>
 </template>
 <script>
     export default{
