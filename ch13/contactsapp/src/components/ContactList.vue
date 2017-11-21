@@ -89,8 +89,7 @@
             },
             editPhoto: function(no){
                 console.log(no);
-                this.$router.push({name: 'updatephoto', params: {no: no}});
-
+                this.$router.push({name: 'updatephoto', params: {no: no}})
             },
             beforeEnter: function(el){
               el.style.opacity = 0;

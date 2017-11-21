@@ -25,7 +25,7 @@ const router = new VueRouter({
             children: [
                 { path: 'add', name: 'addcontact', component: ContactForm },
                 { path: 'update/:no', name: 'updatecontact', component: ContactForm, props: true },
-                { path: 'photo/:no', name: 'updatephoto', compoent: UpdatePhoto, props: true }
+                { path: 'photo/:no', name: 'updatephoto', component: UpdatePhoto, props: true }
             ]
         },
     ]
