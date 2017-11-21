@@ -2,10 +2,15 @@ import contactAPI from '../api/ContactsAPI';
 import Constant from '../constant';
 
 export default {
+
+    [Constant.CHANGE_ISLOADING]: (store, payload) => {
+        store.commit(Constant.CHANGE_ISLOADING, payload);
+    },
     [Constant.ADD_CONTACT_FORM]: (store) => {
         store.commit(Constant.ADD_CONTACT_FORM);
     },
     [Constant.ADD_CONTACT]: (store) => {
+        store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
         contactAPI.addContact(store.state.contact)
             .then((response) => {
                 if (response.data.status == 'success') {
@@ -23,6 +28,7 @@ export default {
             })
     },
     [Constant.UPDATE_CONTACT]: (store) => {
+        store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
         var currentPageNo = store.state.contactlist.pageno;
         contactAPI.updateContact(store.state.contact)
             .then((response) => {
@@ -41,6 +47,7 @@ export default {
             })
     },
     [Constant.UPDATE_PHOTO]: (store, payload) => {
+        store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
         var currentPageNo = store.state.contactlist.pageno;
         contactAPI.updatePhoto(payload.no, payload.file)
             .then((response) => {
@@ -56,16 +63,18 @@ export default {
             pageno = payload.pageno;
         }
         var pagesize = store.state.contactlist.pagesize;
-
+        store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
         contactAPI.fetchContacts(pageno, pagesize)
             .then((response) => {
                 store.commit(Constant.FETCH_CONTACTS, { contactlist: response.data });
+                store.dispatch(Constant.CHANGE_ISLOADING, { isloading: false });
             })
     },
     [Constant.CANCEL_FORM]: (store, payload) => {
         store.commit(Constant.CANCEL_FORM);
     },
     [Constant.DELETE_CONTACT]: (store, payload) => {
+        store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
         var currentPageNo = store.state.contactlist.pageno;
         contactAPI.deleteContact(payload.no)
             .then((response) => {
@@ -74,5 +83,16 @@ export default {
     },
     [Constant.CHANGE_MODE]: (store, payload) => {
         store.commit(Constant.CHANGE_MODE, { mode: payload.mode });
+    },
+    [Constant.FETCH_CONTACT_ONE]: (store, payload) => {
+        store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
+        contactAPI.fetchContactOne(payload.no)
+            .then((response) => {
+                store.commit(Constant.FETCH_CONTACT_ONE, { contact: response.data });
+                store.dispatch(Constant.CHANGE_ISLOADING, { isloading: false });
+            })
+    },
+    [Constant.INITIALIZE_CONTACT_ONE]: (store) => {
+        store.commit(Constant.INITIALIZE_CONTACT_ONE);
     }
 }

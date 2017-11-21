@@ -31,6 +31,7 @@ export default {
             })
     },
     [Constant.UPDATE_PHOTO]: (store, payload) => {
+      console.log('constant update phtoo')
         store.dispatch(Constant.CHANGE_ISLOADING, { isloading: true });
         var currentPageNo = store.state.contactlist.pageno;
         contactAPI.updatePhoto(payload.no, payload.file)

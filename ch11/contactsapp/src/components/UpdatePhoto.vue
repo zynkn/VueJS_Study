@@ -24,21 +24,21 @@
     </div>
 </template>
 <script>
-    import eventBus from '../EventBus.js';
+  import eventBus from '../EventBus.js';
 
-    export default{
-        name: 'updatePhoto',
-        props: ['contact'],
-        methods: {
-            cancelEvent: function(){
-                eventBus.$emit('cancel');
-            },
-            photoSubmit: function(){
-                var file = this.$refs.photofile.files[0];
-                eventBus.$emit('updatePhoto', this.contact.no, file);
-            }
+  export default{
+    name: 'updatePhoto',
+    props: ['contact'],
+    methods: {
+        cancelEvent: function(){
+            eventBus.$emit('cancel');
+        },
+        photoSubmit: function(){
+            var file = this.$refs.photofile.files[0];
+            eventBus.$emit('updatePhoto', this.contact.no, file);
         }
     }
+  }
 </script>
 <style scoped>
     .modal{

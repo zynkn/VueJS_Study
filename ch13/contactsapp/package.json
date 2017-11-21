@@ -13,7 +13,10 @@
     "axios": "^0.17.0",
     "es6-promise": "^4.1.1",
     "lodash": "^4.17.4",
+    "velocity-animate": "^1.5.0",
     "vue": "^2.5.2",
+    "vue-router": "^3.0.1",
+    "vue-simple-spinner": "^1.2.8",
     "vuejs-paginate": "^1.4.0",
     "vuex": "^3.0.1"
   },

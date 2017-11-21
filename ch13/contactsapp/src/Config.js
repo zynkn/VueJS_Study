@@ -6,7 +6,7 @@ export default {
 
     //자세한 API의 도움말은 http://sample.bmaster.kro.kr 참조
     //전체 연락처 데이터 요청(페이징 포함)
-    FETCH: BASE_URL + '/contacts',
+    FETCH: BASE_URL + '/contacts_long',
 
     //연락처 추가
     ADD: BASE_URL + '/contacts',

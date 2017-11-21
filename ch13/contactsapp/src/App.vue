@@ -3,49 +3,25 @@
     <div class="page-header">
       <h1 class="text-center">연락처 관리 애플리케이션</h1>
       <p>(Dynamic Component + EventBus + Axios)</p>
+      <div class="btn-group">
+        <router-link to="/home" class="btn btn-info menu">Home</router-link>
+        <router-link to="/about" class="btn btn-info menu">About</router-link>
+        <router-link to="/contacts" class="btn btn-info menu">Contacts</router-link>
+      </div>
     </div>
-    <component :is="currentView" :contact="contact"></component>
-    <contactList :contactlist="contactlist"></contactList>
-    <paginate ref="pagebuttons" :page-count="totalpage" :page-range="7" :margin-pages="3" 
-              :click-handler="pageChanged" :prev-text="'이전'" :next-text="'다음'" :container-class="'pagination'"
-              :page-class="'page-item'">
-    </paginate>
+    <transition name="flip" mode="out-in">
+      <router-view></router-view>
+    </transition>
+    <loading v-show="isloading"></loading>
   </div>
 </template>
 <script>
-  import ContactList from './components/ContactList';
-  import ContactForm from './components/ContactForm';
-  import UpdatePhoto from './components/UpdatePhoto';
-
-  import CONF from './Config.js';
-  import Constant from './constant';
-  import Paginate from 'vuejs-paginate';
-  import _ from 'lodash';
-  import { mapState } from 'vuex';
-
+  import Loading from './components/Loading';
+  import {mapState} from 'vuex';
   export default {
     name: 'app',
-    components: {
-      ContactList, ContactForm, UpdatePhoto, Paginate
-    },
-    computed: _.extend({
-      totalpage: function(){
-        var totalcount = this.contactlist.totalcount;
-        var pagesize = this.contactlist.pagesize;
-        return Math.floor((totalcount - 1) / pagesize) + 1;
-      }
-    }, mapState([
-      'contactlist', 'currentView'
-    ])
-    ),
-    mounted: function(){
-      this.$store.dispatch(Constant.FETCH_CONTACTS);
-    },
-    methods: {
-      pageChanged: function(page){
-        this.$store.dispatch(Constant.FETCH_CONTACTS, { pageno: page })
-      }
-    }
+    components: {Loading},
+    computed: mapState(['isloading'])
   }
 </script>
 <style scoped>
@@ -58,5 +34,15 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  .flip-enter-active{
+    transition: all 0.4s ease-in-out;
+  }
+  .flip-leave-active{
+    transition: all 0.4s ease-in-out;
+  }
+  .flip-enter, .flip-leave-to{
+    transform: scaleY(0) translateZ(0);
+    opacity: 0;
   }
 </style>

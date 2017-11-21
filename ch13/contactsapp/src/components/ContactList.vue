@@ -1,9 +1,9 @@
 <template>
     <div>
         <p class="addnew">
-            <button class="btn btn-primary" @click="addContact()">
+            <router-link class="btn btn-primary" v-bind:to="{name: 'addcontact' }">
                 새로운 연락처 추가하기
-            </button>
+            </router-link>
         </p>
         <div id="example">
             <table id="list" class="table table-striped table-bordered table-hover">
@@ -22,34 +22,89 @@
                             <button class="btn btn-primary" @click="editContact(contact.no)">편집</button>
                             <button class="btn btn-primary" @click="deleteContact(contact.no)">삭제</button>
                         </td>
-                    </tr> 
+                    </tr>
                 </tbody>
             </table>
         </div>
+        <paginate ref="pagebuttons" :page-count="totalpage" :page-range="7"
+                                    :margin-pages="3" :click-handler="pageChanged" :prev-text="'이전'"
+                                    :next-text= "'다음'" :container-class="'pagination'"></paginate>
+        <transition v-on: before-enter="beforeEnter"
+                    v-on: enter="enter"
+                    v-on: leave="leave">
+          <router-view></router-view>
+        </transition>
+
     </div>
 </template>
 <script>
     import Constant from '../constant';
     import { mapState } from 'vuex';
-
+    import Paginate from 'vuejs-paginate';
+    import _ from 'lodash';
+    import Velocity from 'velocity-animate';
 
     export default{
         name: 'contactlist',
-        computed: mapState([ 'contactlist' ]),
+        components: {Paginate},
+        computed: _.extend({
+            totalpage: function(){
+                var totalcount = this.contactlist.totalcount;
+                var pagesize = this.contactlist.pagesize;
+                return Math.floor((totalcount-1) / pagesize) +1;
+            }
+        },
+        mapState([ 'contactlist'])
+        ),
+        mounted: function(){
+            var page = 1;
+            if(this.$route.query && this.$route.query.page){
+                page = parseInt(this.$route.query.page);
+            }
+            this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno: page});
+            this.$refs.pagebuttons.selected = page-1;
+        },
+        watch: {
+            '$route': function(to, from){
+                if(to.query.page && to.query.page != this.contactlist.pageno){
+                    var page = to.query.page;
+                    this.$store.dispatch(Constant.FETCH_CONTACTS, {pageno: page});
+                    this.$refs.pagebuttons.selected = page-1;
+                }
+            }
+        },
         methods: {
-            addContact: function(){
-                this.$store.dispatch(Constant.ADD_CONTACT_FORM);
+            pageChanged: function(page){
+                this.$router.push({name: 'contacts', query: { page: page}})
             },
             editContact: function(no){
-                this.$store.dispatch(Constant.EDIT_CONTACT_FORM, {no: no});
+                console.log('editcontact')
+                this.$router.push({name: 'updatecontact', params: {no: no}})
             },
             deleteContact: function(no){
                 if(confirm('정말로 삭제하시겠습니까?') == true){
                     this.$store.dispatch(Constant.DELETE_CONTACT, {no:no});
+                    this.$router.push({name: 'contacts'});
                 }
             },
             editPhoto: function(no){
-                this.$store.dispatch(Constant.EDIT_PHOTO_FORM, {no:no});
+                console.log(no);
+                this.$router.push({name: 'updatephoto', params: {no: no}});
+
+            },
+            beforeEnter: function(el){
+              el.style.opacity = 0;
+            },
+            enter: function(el, done){
+              Velocity(el, {opacity: 0, scale: 0.2}, {duration: 200});
+              Velocity(el, {opacity: 0.7, scale: 1.2}, {duration: 200});
+              Velocity(el, {opacity: 1, scale: 1}, {duration: done})
+            },
+            leave: function(el, done){
+              Velocity(el, {translateX: '0px', opacity: 1}, {duration: 100});
+              Velocity(el, {translateX: '20px', opacity: 1}, {duration: 100, loop:2});
+              Velocity(el, {translateX: '0px', opacity: 1}, {duration: 200});
+              Velocity(el, {translateX: '100px', opacity: 0}, {compleate: done});
             }
         }
     }
@@ -124,5 +179,5 @@
         display: block;
         cursor: pointer;
     }
-    
+
 </style>

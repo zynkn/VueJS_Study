@@ -7,5 +7,9 @@ export default {
     CANCEL_FORM: 'cancelForm', //입력, 수정폼 닫기
     EDIT_PHOTO_FORM: 'editPhotoForm', //사진 편집폼 나타내기
     UPDATE_PHOTO: 'updatePhoto', //사진 수정
-    DELETE_CONTACT: 'deleteContact' //연락처 삭제
+    DELETE_CONTACT: 'deleteContact', //연락처 삭제
+    FETCH_CONTACT_ONE: 'fetchContactOne',
+    CHANGE_ISLOADING: 'changeIsLoading',
+    INITIALIZE_CONTACT_ONE: 'initializeContactOne'
+
 }

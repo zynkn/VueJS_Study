@@ -8,6 +8,7 @@ export default {
         state.currentView = 'contactForm';
     },
     [Constant.CANCEL_FORM]: (state) => {
+        console.log('mutations-Cancel')
         state.currentView = null;
     },
     [Constant.EDIT_CONTACT_FORM]: (state, payload) => {
@@ -21,5 +22,14 @@ export default {
     },
     [Constant.FETCH_CONTACTS]: (state, payload) => {
         state.contactlist = payload.contactlist;
+    },
+    [Constant.FETCH_CONTACT_ONE]: (state, payload) => {
+        state.contact = payload.contact;
+    },
+    [Constant.INITIALIZE_CONTACT_ONE]: (state) => {
+        state.contact = { no: '', name: '', tel: '', address: '', photo: '' };
+    },
+    [Constant.CHANGE_ISLOADING]: (state, payload) => {
+        state.isloading = payload.isloading;
     }
 }
