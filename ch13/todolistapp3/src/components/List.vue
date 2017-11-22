@@ -64,6 +64,14 @@
             <span class="close" v-on:click.stop="deleteTodo({index:index})">&#x00D7;</span>
         </li>
     </transition-group>
+
+    <!-- <ul id="todolist">
+        <li v-for="(a, index) in todolist" v-bind:class="checked(a.done)" v-on:click="doneToggle({index:index})">
+            <span>{{ a.todo }}</span>
+            <span v-if="a.done">(완료)</span>
+            <span class="close" v-on:click.stop="deleteTodo({index:index})">&#x00D7;</span>
+        </li>
+    </ul> -->
 </template>
 <script type="text/javascript">
     //import eventBus from './EventBus.vue';

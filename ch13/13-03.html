@@ -10,10 +10,13 @@
         margin: 10px;
       }
       .fade-enter-active, .fade-leave-active{
-        transition: opacity .5s;
+        //transition: opacity .5s;
+        //transform: rotate(0deg);
+        transition: transform 0.5s;
       }
       .fade-enter, .fade-leave-to{
-        opacity: 0;
+        //opacity: 0;
+        transform: rotate(360deg);
       }
     </style>
   </head>
